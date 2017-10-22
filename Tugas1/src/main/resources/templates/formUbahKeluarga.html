@@ -24,7 +24,7 @@
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#">Ubah<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Penduduk</a></li>
+						<li><a href="/penduduk/ubah">Penduduk</a></li>
 						<li><a href="/keluarga/ubah">Keluarga</a></li>
 					</ul></li>
 				<li class="active"><a href="cari">Cari</a></li>
@@ -45,9 +45,7 @@
 
 				<div class="input-group col-sm-8">
 					<span class="input-group-addon">Alamat</span> <input type="text"
-						th:field="*{alamat}" class="form-control" /> <span
-						th:if="${#fields.hasErrors('alamat')}" th:errors="*{alamat}"
-						class="input-group-addon bg-warning">Error Alamat</span>
+						th:field="*{alamat}" class="form-control" />
 				</div>
 
 				<br />
@@ -55,10 +53,7 @@
 				<div class="input-group col-sm-8">
 					<span class="input-group-addon">RT</span> <input type="text"
 						th:field="*{rt}" class="form-control" aria-label="rt"
-						aria-describedby="basic-addon1" /> <span
-						th:if="${#fields.hasErrors('rt')}" th:errors="*{rt}"
-						class="input-group-addon bg-warning" id="basic-addon2">Error
-						Nama</span>
+						aria-describedby="basic-addon1" />
 				</div>
 
 				<br />
@@ -66,10 +61,7 @@
 				<div class="input-group col-sm-8">
 					<span class="input-group-addon">RW</span> <input type="text"
 						th:field="*{rw}" class="form-control" aria-label="rw"
-						aria-describedby="basic-addon1" /> <span
-						th:if="${#fields.hasErrors('rw')}" th:errors="*{rw}"
-						class="input-group-addon bg-warning" id="basic-addon2">Error
-						Nama</span>
+						aria-describedby="basic-addon1" />
 				</div>
 
 				<br />

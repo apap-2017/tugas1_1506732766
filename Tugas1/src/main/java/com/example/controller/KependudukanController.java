@@ -269,8 +269,8 @@ public class KependudukanController {
 
 	        List<PendudukModel> pendudukLain = kependudukanDAO.selectSimilarPenduduk(penduduk.getTanggal_lahir(), kelurahan.getId(), kecamatan.getId(), kota.getId());
 
-	        String nomor_urut = Integer.toString(pendudukLain.size());
-
+	        String nomor_urut = Integer.toString(pendudukLain.size() + 1);
+	        
 	        if(nomor_urut.length() == 1){
 	            nik_baru += "000";
 	            nik_baru += nomor_urut;
@@ -380,7 +380,6 @@ public class KependudukanController {
 
 	            kependudukanDAO.setMati(nik);
 
-	            // Mengecek keaktifan status keluarga
 	            KeluargaModel keluarga = kependudukanDAO.selectKeluarga(penduduk.getId_keluarga());
 	            int size = kependudukanDAO.keluargaSize(keluarga);
 	            if(size == 0){
