@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<head>
+<title>Successfully Change Keluarga</title>
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Sistem Kependudukan DKI</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="/">Home</a></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Tambah<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="/penduduk/tambah">Penduduk</a></li>
+						<li><a href="/keluarga/tambah">Keluarga</a></li>
+					</ul></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Ubah<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Penduduk</a></li>
+						<li><a href="/keluarga/ubah">Keluarga</a></li>
+					</ul></li>
+				<li class="active"><a href="cari">Cari</a></li>
+			</ul>
+		</div>
+	</nav>
+<div class="container">
+	<center>
+		<h2>Sukses!</h2>
+		<p th:text="'Keluarga dengan NKK ' + ${nkk_lama} + ' berhasil diubah'">Info tambahan</p>
+	</center>
+</div>
+</body>
+</html>
