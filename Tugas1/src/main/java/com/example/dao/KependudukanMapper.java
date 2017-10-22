@@ -52,10 +52,10 @@ public interface KependudukanMapper {
 	void addPenduduk (PendudukModel penduduk);
 	
 	@Select("SELECT DISTINCT p.nama FROM penduduk p, keluarga k, kelurahan kel, kecamatan kec, "
-			+ "kota ko WHERE p.tanggal_lahir = #{tanggal_lahir} AND p.id_keluarga = k.id AND k.id_kelurahan = #{id_kelurahan} "
-	 		+ "AND kel.id_kecamatan = #{id_kecamatan} AND kec.id_kota = #{id_kota}")
-	List<PendudukModel> selectSimilarPenduduk (@Param("tanggal_lahir") String tanggal_lahir, 
-			@Param("id_kelurahan") int id_kelurahan, @Param("id_kecamatan") int id_kecamatan, @Param("id_kota") int id_kota);
+			+ "kota ko WHERE p.tanggal_lahir = #{tanggal_lahir} AND p.id_keluarga = k.id AND k.id_kelurahan = "
+			+ "#{id_kelurahan} AND kel.id_kecamatan = #{id_kecamatan} AND kec.id_kota = #{id_kota}")
+	List<PendudukModel> selectSimilarPenduduk (@Param("tanggal_lahir") String tanggal_lahir, @Param("id_kelurahan")
+	int id_kelurahan, @Param("id_kecamatan") int id_kecamatan, @Param("id_kota") int id_kota);
 	
 	@Select("SELECT * FROM kelurahan")
     List<KelurahanModel> selectAllKelurahan();
@@ -64,13 +64,28 @@ public interface KependudukanMapper {
 			+ "VALUES (#{id}, #{nomor_kk}, #{alamat}, #{rt}, #{rw}, #{id_kelurahan}, #{is_tidak_berlaku})")
     void addKeluarga (KeluargaModel keluarga);
 	
-	@Select("SELECT * FROM keluarga k, kelurahan kel WHERE k.id_kelurahan = kel.id AND kel.id_kecamatan = #{id_kecamatan}")
+	@Select("SELECT * FROM keluarga k, kelurahan kel WHERE k.id_kelurahan = kel.id AND kel.id_kecamatan = "
+			+ "#{id_kecamatan}")
     List<KeluargaModel> selectKeluargaByKecamatan (@Param("id_kecamatan") int id_kecamatan);
 	
-	@Update("UPDATE penduduk SET nik = #{penduduk.nik}, nama = #{penduduk.nama}, jenis_kelamin = #{penduduk.jenis_kelamin}, golongan_darah = #{penduduk.golongan_darah}, agama = #{penduduk.agama}, status_perkawinan = #{penduduk.status_perkawinan}, pekerjaan = #{penduduk.pekerjaan}, is_wni = #{penduduk.is_wni}, id_keluarga = #{penduduk.id_keluarga} WHERE nik = #{nik_lama}")
+	@Update("UPDATE penduduk SET nik = #{penduduk.nik}, nama = #{penduduk.nama}, jenis_kelamin = "
+			+ "#{penduduk.jenis_kelamin}, golongan_darah = #{penduduk.golongan_darah}, agama = #{penduduk.agama}, "
+			+ "status_perkawinan = #{penduduk.status_perkawinan}, pekerjaan = #{penduduk.pekerjaan}, is_wni = "
+			+ "#{penduduk.is_wni}, id_keluarga = #{penduduk.id_keluarga} WHERE nik = #{nik_lama}")
 	void updatePenduduk (@Param ("penduduk") PendudukModel penduduk, @Param("nik_lama") String nik_lama);
 	
 	@Insert("UPDATE keluarga SET nomor_kk = #{keluarga.nomor_kk}, alamat = #{keluarga.alamat}, rt = #{keluarga.rt}, "
 			+ "rw = #{keluarga.rw}, id_kelurahan = #{keluarga.id_kelurahan} WHERE nomor_kk = #{nkk_lama}")
 	void updateKeluarga (@Param("keluarga") KeluargaModel keluarga, @Param("nkk_lama") String nkk_lama);
+	
+	@Update("UPDATE penduduk SET is_wafat = '1' WHERE nik = #{nik}")
+    void setMati (@Param("nik") String nik);
+	
+	@Select("SELECT DISTINCT COUNT(p.nama) FROM penduduk p, keluarga k WHERE p.id_keluarga = k.id AND "
+			+ "p.is_wafat = '0' AND k.nomor_kk = #{nomor_kk}")
+    int keluargaSize (KeluargaModel keluarga);
+
+    @Update("UPDATE keluarga SET is_tidak_berlaku = '1' WHERE nomor_kk = #{nomor_kk}")
+    void setKeluargaTidakBerlaku (KeluargaModel keluarga);
+
 }

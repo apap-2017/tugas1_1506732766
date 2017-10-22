@@ -25,4 +25,7 @@ public interface KependudukanService {
 	List<KeluargaModel> selectKeluargaByKecamatan (int id_kecamatan);
 	void updatePenduduk (PendudukModel penduduk, String nik_lama);
 	void updateKeluarga (KeluargaModel keluarga, String nkk_lama);
+	void setMati (String nik);
+	int keluargaSize (KeluargaModel keluarga);
+	void setKeluargaTidakBerlaku (KeluargaModel keluarga);
 }

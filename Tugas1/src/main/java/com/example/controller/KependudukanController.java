@@ -371,4 +371,23 @@ public class KependudukanController {
 		
     		return "berhasilUbahKeluarga";
     }
+	
+	 @RequestMapping(value = "/penduduk/mati", method = RequestMethod.POST)
+	    public String pendudukMati (Model model,
+	                                @RequestParam(value = "nik") String nik)
+	    {
+	        PendudukModel penduduk = kependudukanDAO.selectPenduduk(nik);
+
+	            kependudukanDAO.setMati(nik);
+
+	            // Mengecek keaktifan status keluarga
+	            KeluargaModel keluarga = kependudukanDAO.selectKeluarga(penduduk.getId_keluarga());
+	            int size = kependudukanDAO.keluargaSize(keluarga);
+	            if(size == 0){
+	                kependudukanDAO.setKeluargaTidakBerlaku(keluarga);
+	            }
+
+	            model.addAttribute("penduduk", penduduk);
+	            return "matiPenduduk";
+	    }
 }

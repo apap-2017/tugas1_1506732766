@@ -127,4 +127,26 @@ public class KependudukanServiceDatabase implements KependudukanService {
         log.info ("change keluarga with nkk {}", nkk_lama);
         kependudukanMapper.updateKeluarga (keluarga, nkk_lama);
     }
+	
+	@Override
+    public void setMati (String nik)
+    {
+        log.info ("change is_wafat of penduduk with nik {}", nik);
+        kependudukanMapper.setMati (nik);
+    }
+	
+	@Override
+	public int keluargaSize (KeluargaModel keluarga)
+    {
+        log.info ("count how many penduduk alive in keluarga {}", keluarga);
+        return kependudukanMapper.keluargaSize (keluarga);
+    }
+
+	@Override
+    public void setKeluargaTidakBerlaku (KeluargaModel keluarga)
+    {
+        log.info ("change is_tidak_berlaku of keluarga {}", keluarga);
+        kependudukanMapper.setKeluargaTidakBerlaku (keluarga);
+    }
+	
 }
